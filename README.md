@@ -50,12 +50,12 @@ Regions are also included for Arcade Roms and a flag is used to illustrate this 
 
 | Flag Icon | Region |
 | ---- | ------------- |
-| ![Players](/parts/mame-regions-asia.png|width=200) | Asia |
-| ![Players](/parts/mame-regions-europe.png|width=200) | Europe |
-| ![Players](/parts/mame-regions-japan.png|width=200) | Japan |
-| ![Players](/parts/mame-regions-oceania.png|width=200) | Oceania |
-| ![Players](/parts/mame-regions-us.png|width=200) | United States |
-| ![Players](/parts/mame-regions-world.png|width=200) | World |
+| <img src="https://github.com/zombiesbyte/mvs-insertcoin/parts/mame-regions-asia.png" height="200"> | Asia |
+| ![Flags](/parts/mame-regions-europe.png) | Europe |
+| ![Flags](/parts/mame-regions-japan.png) | Japan |
+| ![Flags](/parts/mame-regions-oceania.png) | Oceania |
+| ![Flags](/parts/mame-regions-us.png) | United States |
+| ![Flags](/parts/mame-regions-world.png) | World |
 
 ## Status
 
@@ -63,7 +63,7 @@ The status of the emulation is also illustrated by a coloured dot next to the RO
 
 | Status Icon | Status Name |
 | ---- | ------------- |
-| ![Players](/parts/icons/good.png) | Good |
-| ![Players](/parts/icons/good.png) | Imperfect |
-| ![Players](/parts/icons/good.png) | Preliminary |
+| ![Status](/parts/icons/good.png) | Good |
+| ![Status](/parts/icons/imperfect.png) | Imperfect |
+| ![Status](/parts/icons/preliminary.png) | Preliminary |
 
