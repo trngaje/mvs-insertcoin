@@ -41,8 +41,8 @@ The icon system at the top of the screen illustrates the total players the game 
 | ![Players](/parts/icons/9p-alt.png) | 9 Players Alternate Play |
 | ![Players](/parts/icons/9p-sim.png) | 9 Player Simultaneous Play |
 | ![Players](/parts/icons/device.png) | Device (or BIOS) |
-| ![Players](/parts/icons/9p-sim.png) | Non-Arcade |
-| ![Players](/parts/icons/9p-sim.png) | Pinball |
+| ![Players](/parts/icons/non-arcade.png) | Non-Arcade |
+| ![Players](/parts/icons/pinball.png) | Pinball |
 
 ## Regions
 
@@ -50,12 +50,20 @@ Regions are also included for Arcade Roms and a flag is used to illustrate this 
 
 | Flag Icon | Region |
 | ---- | ------------- |
-| ![Players](/parts/mame-regions-asia.png) | Asia |
-| ![Players](/parts/mame-regions-europe.png) | Europe |
-| ![Players](/parts/mame-regions-japan.png) | Japan |
-| ![Players](/parts/mame-regions-oceania.png) | Oceania |
-| ![Players](/parts/mame-regions-us.png) | United States |
-| ![Players](/parts/mame-regions-world.png) | World |
+| ![Players](/parts/mame-regions-asia.png|width=200) | Asia |
+| ![Players](/parts/mame-regions-europe.png|width=200) | Europe |
+| ![Players](/parts/mame-regions-japan.png|width=200) | Japan |
+| ![Players](/parts/mame-regions-oceania.png|width=200) | Oceania |
+| ![Players](/parts/mame-regions-us.png|width=200) | United States |
+| ![Players](/parts/mame-regions-world.png|width=200) | World |
 
+## Status
 
+The status of the emulation is also illustrated by a coloured dot next to the ROM number box at the bottom right
+
+| Status Icon | Status Name |
+| ---- | ------------- |
+| ![Players](/parts/icons/good.png) | Good |
+| ![Players](/parts/icons/good.png) | Imperfect |
+| ![Players](/parts/icons/good.png) | Preliminary |
 
