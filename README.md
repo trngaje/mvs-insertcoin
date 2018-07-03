@@ -50,12 +50,12 @@ Regions are also included for Arcade Roms and a flag is used to illustrate this 
 
 | Flag Icon | Region |
 | ---- | ------------- |
-| <img src="https://github.com/zombiesbyte/mvs-insertcoin/parts/mame-regions-asia.png" height="200"> | Asia |
-| ![Flags](/parts/mame-regions-europe.png) | Europe |
-| ![Flags](/parts/mame-regions-japan.png) | Japan |
-| ![Flags](/parts/mame-regions-oceania.png) | Oceania |
-| ![Flags](/parts/mame-regions-us.png) | United States |
-| ![Flags](/parts/mame-regions-world.png) | World |
+| <img src="https://github.com/zombiesbyte/mvs-insertcoin/blob/master/parts/mame-regions-asia.png" height="200"> | Asia |
+| !<img src="https://github.com/zombiesbyte/mvs-insertcoin/blob/master/parts/mame-regions-europe.png" height="200"> | Europe |
+| <img src="https://github.com/zombiesbyte/mvs-insertcoin/blob/master/parts/mame-regions-japan.png" height="200"> | Japan |
+| <img src="https://github.com/zombiesbyte/mvs-insertcoin/blob/master/parts/mame-regions-oceania.png" height="200"> | Oceania |
+| <img src="https://github.com/zombiesbyte/mvs-insertcoin/blob/master/parts/mame-regions-us.png" height="200"> | United States |
+| <img src="https://github.com/zombiesbyte/mvs-insertcoin/blob/master/parts/mame-regions-world.png" height="200"> | World |
 
 ## Status
 
