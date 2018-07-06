@@ -3,6 +3,7 @@
 ## Attract Mode Theme
 
 ### YouTube Video https://www.youtube.com/watch?v=ebG0kWYazMc
+#### version 1.1
 
 Attract Mode Theme/Layout based on the Neo Geo MVS Arcade Cabinet. This layout has a minimal amount of options with a lot of specifically customised features.
 
@@ -67,3 +68,12 @@ The status of the emulation is also illustrated by a coloured dot next to the RO
 | ![Status](/parts/icons/imperfect.png) | Imperfect |
 | ![Status](/parts/icons/preliminary.png) | Preliminary |
 
+1.1 Update
+- Updated the code used to create the carousel (conveyor). Originally I used RoboSpin for the basis of this however through the course of trying to correct some issues have instead used a modification of Orbit's layout conveyor code.
+
+Known issues
+- Showing an image placeholder for missing graphic is still a little glitchy. 
+    - **Description**
+    - Although I can now get this to populate correctly, moving the carousel may remove the placeholder until the wheel has been moved again. This stablises once the placehoder returns but there is obviously something I'm missing for getting this to update.
+    - **Workaround**
+    - Make sure that you have no flyers missing :)

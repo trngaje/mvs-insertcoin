@@ -1,4 +1,6 @@
 // Dal1980
+// MVS-InsertCoin V1.1
+
 fe.load_module("animate");
 fe.load_module("conveyor");
 fe.load_module("scrollingtext"); 
@@ -64,58 +66,108 @@ VidSnap.pinch_y = -60;
 local crt = fe.add_image("parts/crt.png", flw*0.780, 0, flw*0.221, flh*0.370 ); //overlay
 crt.preserve_aspect_ratio = true;
 
-// wheel
-//                 [x]   [x]      [x]        [1]         [2]         [3]      ****4****      [5]         [6]         [7]        [x]   
-local wheel_x = [   0,    0,  0,          flw*0.010,  flw*0.070,  flw*0.190,  flw*0.335,  flw*0.590,  flw*0.740,  flw*0.850,    flw*0.999]; 
-local wheel_y = [   0,    0,  flh*0.385,  flh*0.365,  flh*0.325,  flh*0.285,  flh*0.245,  flh*0.285,  flh*0.325,  flh*0.365,    flh*0.385];
-local wheel_w = [   0,    0,  flw*0.090,  flw*0.140,  flw*0.190,  flw*0.240,  flw*0.360,  flw*0.240,  flw*0.190,  flw*0.140,    flw*0.090 ];     
-local wheel_h = [   0,    0,  flh*0.180,  flh*0.280,  flh*0.380,  flh*0.480,  flh*0.580,  flh*0.480,  flh*0.380,  flh*0.280,    flh*0.180];
-local wheel_a = [   0,    0,  0,          255,        255,        255,        255,        255,        255,        255,          0 ];
-local wheel_r = [   0,    0,  0,          0,          0,          0,          0,          0,          0,          0,            0 ];
+//Conveyor Settings
+const FLYER_WIDTH = 200;
+const FLYER_HEIGHT = 700;
+local num_sats = fe.layout.page_size = 11;
+local progress_correction = 1.0 / ( num_sats * 2 );
+local spin_ms = 120;
+local nSlot = -6;
 
-local num_arts = 10;
-class WheelEntry extends ConveyorSlot {
-     
-     constructor() {
-          base.constructor( ::fe.add_artwork("flyer"));
+//
+// Create a class to contain an orbit artwork
+//
+function get_y( x ){ return ( 280 + sqrt( 72900 - pow( x - 300, 1 ) )); }
+
+class Satallite extends ConveyorSlot
+{
+     //the first 3 and the last 3 positions are not really used
+     static x_lookup =   [80,    80,    80, //not applicable 
+                         120,    250,   450,            640,                840,   1040,  1170,
+                         1170,   1170,  1170]; //not applicable 
+     static s_lookup =   [0.300, 0.400, 0.500, //not applicable 
+                         1.000,  1.300, 1.800,          2.000,              1.800, 1.300, 1.000,
+                         0.500,  0.400, 0.300 ]; //not applicable 
+
+     constructor()
+     {
+          //print("> " + nSlot + " " + fe.get_art("flyer", nSlot) + "\n");
+          if(fe.get_art("flyer", nSlot) != ""){
+               local o = fe.add_artwork( "flyer" );
+               o.preserve_aspect_ratio = true;
+               base.constructor( o );
+          }
+          else{
+               local o = fe.add_image("parts/no_image.png");
+               o.preserve_aspect_ratio = true;
+               base.constructor( o );
+          }
      }
 
-     function on_progress( progress, var ) {
+     //
+     // Place, scale and set the colour of the artwork based
+     // on the value of "progress" which ranges from 0.0-1.0
+     //
+     function on_progress( progress, var )
+     {
+          local scale;
+          local new_x;
+          progress += progress_correction;
 
-          local p = progress / 0.1;
-          local slot = p.tointeger();
-          p -= slot;
-          slot++;
-
-          if ( slot <= 0 ) slot=0;
-          if ( slot >= 9 ) slot=9;
-
-          if(m_obj.file_name == ""){
-               m_obj.file_name = "parts/no_image.png";
-               m_obj.preserve_aspect_ratio = true;
+          if ( progress >= 1.0 )
+          {
+               scale = s_lookup[ 12 ];
+               new_x = x_lookup[ 12 ];
           }
-          m_obj.x = wheel_x[slot];
-          m_obj.y = wheel_y[slot] + p * ( wheel_y[slot+1] - wheel_y[slot] );
-          m_obj.width = wheel_w[slot] + p * ( wheel_w[slot+1] - wheel_w[slot] );
-          m_obj.height = wheel_h[slot] + p * ( wheel_h[slot+1] - wheel_h[slot] );
-          m_obj.rotation = wheel_r[slot] + p * ( wheel_r[slot+1] - wheel_r[slot] );
-          m_obj.alpha = wheel_a[slot] + p * ( wheel_a[slot+1] - wheel_a[slot] );
-          m_obj.preserve_aspect_ratio = true;
+          else if ( progress < 0 )
+          {
+               scale = s_lookup[ 0 ];
+               new_x = x_lookup[ 0 ];
+          }
+          else
+          {
+               local slice = ( progress * 12.0 ).tointeger();
+               local factor = ( progress - ( slice / 12.0 ) ) * 12.0;
+
+               scale = s_lookup[ slice ]
+                    + (s_lookup[slice+1] - s_lookup[slice]) * factor;
+
+               new_x = x_lookup[ slice ]
+                    + (x_lookup[slice+1] - x_lookup[slice]) * factor;
+          }
+
+          if(m_obj.file_name == "") m_obj.file_name = "parts/no_image.png";
+          
+          m_obj.width = FLYER_WIDTH * scale;
+          m_obj.height = FLYER_HEIGHT * scale;
+          m_obj.x = new_x - m_obj.width / 2;
+          m_obj.y = get_y( new_x ) - m_obj.height / 2;
      }
 }
 
-local wheel_entries = [];
-for ( local i=0; i < 6; i++ )
-wheel_entries.push( WheelEntry() );
-local remaining = num_arts - wheel_entries.len();
-// we do it this way so that the last wheelentry created is the middle one showing the current
-// selection (putting it at the top of the draw order)
-for ( local i=0; i < 4; i++ )
-wheel_entries.insert( 5, WheelEntry() );
+//
+// Initialize the orbit artworks with selection at the top
+// of the draw order
+//
+local sats = [];
 
-local conveyor = Conveyor();
-conveyor.set_slots( wheel_entries );
-conveyor.transition_ms = 55;
+for ( local i=0; i < num_sats  / 2; i++ ){
+     nSlot++;
+     sats.append( Satallite() );
+}
+nSlot = 6;
+for ( local i=0; i < ( num_sats + 1 ) / 2; i++ ){
+     nSlot--;
+     sats.insert( num_sats / 2, Satallite() );
+}
+
+//
+// Initialize a conveyor to control the artworks
+//
+local orbital = Conveyor();
+orbital.transition_ms = spin_ms;
+orbital.transition_swap_point = 1.0;
+orbital.set_slots( sats );
 
 //larger logo
 local logo = fe.add_artwork( "wheel", flw*0.040, flh*0.81, flw*0.300, flh*0.180);
